@@ -7,7 +7,7 @@ async function createAdminTable() {
  name varchar(100) NOT NULL,
  email varchar(100) NOT NULL unique,
  phone_number varchar(50) NOT NULL unique,
- password varchar(50) NOT NULL
+ password varchar(200) NOT NULL
     )`;
     await executeQuery(sql, []);
     // console.log({ result });

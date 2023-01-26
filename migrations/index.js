@@ -16,4 +16,5 @@ const { setDefaultPoints } = require("./set_default_points");
   await createSessionPoints();
   await createTableTeacher();
   await setDefaultPoints();
+  process.exit();
 })();

@@ -42,7 +42,12 @@ async function getStudents(req, res) {
     const admissionNumber = req.query.admissionNumber;
     const stream = req.query.stream;
     const studentClass = req.query.class;
-    let result = await Student.getAll(query, admissionNumber, stream,studentClass);
+    let result = await Student.getAll(
+      query,
+      admissionNumber,
+      stream,
+      studentClass
+    );
     return res.json({
       success: true,
       success_message: "list of students",

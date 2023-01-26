@@ -11,6 +11,7 @@ async function login(req, res) {
   const password = req.body.password;
   const isAdmin = req.body.isAdmin;
   if (!email || !password) {
+    res.statusCode = 401;
     return res.json({
       message: "Please provide all details.",
       success: false,
@@ -35,6 +36,7 @@ async function login(req, res) {
         token: token,
       });
     } else {
+      res.statusCode = 401;
       return res.json({
         message: "Invalid email or password",
         success: false,
@@ -59,6 +61,7 @@ async function login(req, res) {
         token: token,
       });
     } else {
+      res.statusCode = 401;
       return res.json({
         message: "Invalid email or password",
         success: false,
