@@ -1,20 +1,19 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const cors = require("cors");
+// const cors = require("cors");
 
 const app = express();
 dotenv.config({ path: ".env" });
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
-
 const v1Router = require("./src/v1/routes/index");
 const swaggerDocs = require("./swagger");
 const authMiddleware = require("./src/middleware/auth-middleware");
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Content-Type"],
+//   })
+// );
 
 app.use(express.json());
 app.use(authMiddleware);

@@ -35,6 +35,10 @@ class Session {
       return false;
     }
   }
+  static async getAll() {
+    const result = await executeQuery("SELECT * FROM session ", []);
+    return result;
+  }
   static async sessionStartDate() {
     const result = await executeQuery(
       "SELECT s.start_date FROM session s WHERE s.start_date < NOW() AND s.end_date > NOW()",

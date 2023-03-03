@@ -12,6 +12,7 @@ const addSessionRoutes = require("./new_session");
 const getSessionsRoutes = require("./get-sessions");
 const addOffenseRoutes = require("./new_offense");
 const addNewOffenseRouter = require("./new_offense");
+const getAllOffenseRecords = require("./get_offense_records");
 const router = express.Router();
 
 /**
@@ -39,5 +40,6 @@ router.use(addSessionRoutes);
 router.use(getSessionsRoutes);
 router.use(addOffenseRoutes);
 router.use(addNewOffenseRouter);
+router.use(getAllOffenseRecords);
 
 module.exports = router;

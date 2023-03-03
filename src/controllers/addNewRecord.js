@@ -43,6 +43,7 @@ async function addNewRecord(req, res) {
     }
 
     const getSessionStartDate = await Session.sessionStartDate();
+    console.log(getSessionStartDate);
 
     const currentWeek = await getWeek(getSessionStartDate);
 

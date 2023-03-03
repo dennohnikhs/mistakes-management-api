@@ -29,4 +29,41 @@ async function addOffense(req, res) {
     });
   }
 }
-module.exports = { addOffense };
+// async function getOffenseRecords(req, res) {
+//   try {
+//     const result = await Offense.getAll();
+//     return res.json({
+//       success: true,
+//       success_message: "List of Students Offense Record",
+//       List_of_Records: result,
+//     });
+//   } catch (error) {
+//     console.log({ error });
+//     console.log("Error while trying to get students' offense records");
+//     return res.json({
+//       success: false,
+//       message: "Error while trying to get students' offense records",
+//     });
+//   }
+// }
+async function getOffenseRecords(req, res) {
+  try {
+    let result = await Offense.getAll();
+    return res.json({
+      success: true,
+      success_message: "Students Records",
+      list_of_sessions: result,
+    });
+  } catch (error) {
+    {
+      console.log("Error while trying to get Records");
+      console.log({ error });
+      res.json({
+        success: false,
+        success_message:
+          "Oops!!! an error occurred while trying to get Records",
+      });
+    }
+  }
+}
+module.exports = { addOffense, getOffenseRecords };
