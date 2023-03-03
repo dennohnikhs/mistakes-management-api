@@ -6,80 +6,85 @@ const router = express.Router();
  * @swagger
  *  components:
  *   schema:
- *     Sessions:
+ *     Offenses:
  *      type: array
  *      items:
  *           type: object
  *           items:
  *               type: object
  *               properties:
- *                 term:
+ *                 teacher_id:
  *                    type: integer
- *                 start_date:
- *                    type: Date
- *                 end_date:
+ *                 offense_type_id:
+ *                    type: integer
+ *                 student_id:
+ *                    type: integer
+ *                 comment:
+ *                    type: string
+ *                 points_deducted:
+ *                    type: integer
+ *                 week:
+ *                    type: integer
+ *                 created_at:
  *                    type: Date
  *      example:
- *            term: 2
- *            start_date: 3/10/2020
- *            end_date: 2/3/2021
-
+ *            id: 1
+ *            offense_type_id: 2
+ *            student_id: 23
+ *            comment: teacher comments
+ *            points_deducted:
+ *            week: 2
+ *            created_at: 2023-03-03T09:47:48.000Z
  */
 
 /**
  * @swagger
  * components:
  *  schema:
- *      sessionsResponse:
+ *      OffenseRecords:
  *          type: object
  *          properties:
  *              success:
  *                  type: boolean
  *              success_message:
  *                  type: string
- *                  example: "list of available sessions"
- *              sessions:
+ *                  example: "list of students Records"
+ *              records:
  *                  type: array
  *                  items:
- *                      $ref: '#components/schema/Sessions'
+ *                      $ref: '#components/schema/Offenses'
  *
  */
 
 /**
  * @openapi
- * /api/sessions:
+ * /api/offenses:
  *  get:
  *     tags:
- *     - Sessions
- *     summary: Get all sessions
+ *     - Offenses
+ *     summary: Get all Offenses
  *     security:
  *     - bearerAuth: []
  *     parameters:
  *       - in: query
- *         name: term
+ *         name: created_id
+ *         schema:
+ *            type: Date
+ *         required: false
+ *         description: get Offenses  filtered by created time 
+ *       - in: query
+ *         name: student_id
  *         schema:
  *            type: integer
  *         required: false
- *         description: get sessions  filtered by terms 
- *       - in: query
- *         name: start_date
- *         schema:
- *            type: Date
- *         required: false
- *         description: get sessions filtered by start_date
- *       - in: query
- *         name: end_date
- *         schema:
- *            type: Date
- *         required: false
- *         description: get sessions filtered by end_date
+ *         description: get Offenses filtered by student ids
  *     responses:
  *       200:
  *         description: Success
  *         content:
  *          application/json:
  *            schema:
- *              $ref: '#components/schema/sessionsResponse'  
+ *              $ref: '#components/schema/OffensesResponse'  
 
  *       400:
  *         description: Bad request
