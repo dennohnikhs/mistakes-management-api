@@ -7,14 +7,9 @@ dotenv.config({ path: ".env" });
 const v1Router = require("./src/v1/routes/index");
 const swaggerDocs = require("./swagger");
 const authMiddleware = require("./src/middleware/auth-middleware");
-// app.use(
-//   cors({
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//     allowedHeaders: ["Content-Type"],
-//   })
-// );
-
+app.get("/", (req, res) => {
+  res.send("The application is up and the server is started");
+});
 app.use(express.json());
 app.use(authMiddleware);
 app.use(v1Router);
