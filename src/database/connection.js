@@ -3,16 +3,11 @@ const { makeDb } = require("mysql-async-simple");
 
 var con = {
   host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
+  user: process.env.DB_USERNAME || "root",
   password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "points_system",
+  database: process.env.DB_USERNAME || "points_system",
 };
-// var con = {
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "points_system",
-// };
+
 let connection;
 
 function handleDisconnect() {
