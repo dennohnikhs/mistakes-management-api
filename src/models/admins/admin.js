@@ -4,10 +4,12 @@ const bcrypt = require("bcryptjs");
 class Admin {
   static async addOne(name, email, phone_number, password) {
     try {
-      await executeQuery(
+      let result = await executeQuery(
         "INSERT INTO admin (name,email,phone_number,password) VALUES (?,?,?,?)",
         [name, email, phone_number, password]
       );
+      console.log("admin posted", result);
+      // return result;
     } catch (error) {
       console.log({ error });
     }
@@ -27,7 +29,6 @@ class Admin {
         return false;
       }
       delete admin.password;
-
       return admin;
     }
     return false;

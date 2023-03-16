@@ -5,6 +5,7 @@ const { createSessionTable } = require("./create_table_session");
 const { createSessionPoints } = require("./create_table_session_points");
 const { createStudentsTable } = require("./create_table_student");
 const { createTableTeacher } = require("./create_table_teacher");
+const { addMainAdmin } = require("./insert_into_admin");
 const { setDefaultPoints } = require("./set_default_points");
 
 (async () => {
@@ -16,5 +17,6 @@ const { setDefaultPoints } = require("./set_default_points");
   await createSessionPoints();
   await createTableTeacher();
   await setDefaultPoints();
+  await addMainAdmin();
   process.exit();
 })();
