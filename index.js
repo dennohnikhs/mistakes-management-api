@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(cors());
@@ -12,6 +13,8 @@ app.get("/", (req, res) => {
   res.send("The application is up and the server is started");
 });
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(authMiddleware);
 app.use(v1Router);
 const port = process.env.PORT || 5500;
