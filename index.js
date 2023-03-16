@@ -1,7 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 dotenv.config({ path: ".env" });
 const v1Router = require("./src/v1/routes/index");
 const swaggerDocs = require("./swagger");
