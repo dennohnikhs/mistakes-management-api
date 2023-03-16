@@ -6,7 +6,13 @@ const http = require("http");
 
 dotenv.config({ path: ".env" });
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 const v1Router = require("./src/v1/routes/index");
 const swaggerDocs = require("./swagger");
 const authMiddleware = require("./src/middleware/auth-middleware");
