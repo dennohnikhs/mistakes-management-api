@@ -1,7 +1,7 @@
 const { executeQuery } = require("../../database/connection");
 
 class Offense {
-  static async newRecord(
+  static async addOne(
     teacherId,
     offenseTypeId,
     studentId,

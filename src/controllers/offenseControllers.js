@@ -29,23 +29,7 @@ async function addOffense(req, res) {
     });
   }
 }
-// async function getOffenseRecords(req, res) {
-//   try {
-//     const result = await Offense.getAll();
-//     return res.json({
-//       success: true,
-//       success_message: "List of Students Offense Record",
-//       List_of_Records: result,
-//     });
-//   } catch (error) {
-//     console.log({ error });
-//     console.log("Error while trying to get students' offense records");
-//     return res.json({
-//       success: false,
-//       message: "Error while trying to get students' offense records",
-//     });
-//   }
-// }
+
 async function getOffenseRecords(req, res) {
   try {
     let result = await Offense.getAll();
