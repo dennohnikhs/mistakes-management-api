@@ -10,7 +10,7 @@ const { makeDb } = require("mysql-async-simple");
 var con = {
   host: "localhost",
   user: "root",
-  password: "",
+  password: "admin",
   database: "points_system",
 };
 

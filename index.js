@@ -1,13 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const v1Router = require("./src/v1/routes/index");
 const cors = require("cors");
-
 const cookieParser = require("cookie-parser");
 
 dotenv.config({ path: ".env" });
 const app = express();
 app.use(cors());
-const v1Router = require("./src/v1/routes/index");
 const swaggerDocs = require("./swagger");
 const authMiddleware = require("./src/middleware/auth-middleware");
 app.get("/", (req, res) => {

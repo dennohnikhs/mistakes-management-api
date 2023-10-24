@@ -16,9 +16,10 @@ class Admin {
   }
   static async validateAdmin(adminEmail, adminPassword) {
     const result = await executeQuery(
-      "SELECT id,email, password FROM admin WHERE email = (?)LIMIT 1",
+      "SELECT * FROM admin WHERE email = (?)LIMIT 1",
       [adminEmail, adminPassword]
     );
+
     if (result.length > 0) {
       const admin = result[0];
       let passwordVerified = await bcrypt.compare(

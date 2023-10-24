@@ -17,11 +17,9 @@ async function login(req, res) {
       success: false,
     });
   }
+
   if (isAdmin) {
-    const adminDetails = await Admin.validateAdmin(
-      req.body.email,
-      req.body.password
-    );
+    const adminDetails = await Admin.validateAdmin(email, password);
     if (adminDetails) {
       let token = jwt.sign(
         { id: adminDetails.id, isAdmin: true },
@@ -43,10 +41,7 @@ async function login(req, res) {
       });
     }
   } else {
-    const teacherDetails = await Teacher.validateTeacher(
-      req.body.email,
-      req.body.password
-    );
+    const teacherDetails = await Teacher.validateTeacher(email, password);
     if (teacherDetails) {
       let token = jwt.sign(
         { id: teacherDetails.id, isAdmin: false },

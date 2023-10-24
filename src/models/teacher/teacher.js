@@ -35,7 +35,7 @@ class Teacher {
 
   static async validateTeacher(teacherEmail, teacherPassword) {
     const result = await executeQuery(
-      "SELECT id,email,password FROM teacher WHERE email = (?) LIMIT 1",
+      "SELECT  * FROM teacher WHERE email = (?) LIMIT 1",
       [teacherEmail, teacherPassword]
     );
     if (result.length > 0) {
