@@ -44,7 +44,7 @@ async function getAllTeachers(req, res) {
     return res.json({
       success: true,
       success_message: "list of teachers",
-      list_of_students: result,
+      list_of_teachers: result,
     });
   } catch (error) {
     {
