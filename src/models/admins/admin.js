@@ -14,6 +14,37 @@ class Admin {
       console.log({ error });
     }
   }
+  static async deleteOneAdmin(adminEmail) {
+    try {
+      let result = await executeQuery("DELETE FROM admin WHERE email =  (?)", [
+        adminEmail,
+      ]);
+      console.log("admin deleted", result);
+    } catch (error) {
+      console.log({ error });
+      throw error; // Propagate the error to the controller
+    }
+  }
+  static async findOne(adminEmail) {
+    let result = await executeQuery(
+      "SELECT name,phone_number,id FROM admin WHERE email =  (?)",
+      [adminEmail]
+    );
+    return result;
+  }
+  static async editAdminDetails(adminPassword, adminEmail) {
+    try {
+      let result = await executeQuery(
+        "UPDATE admin SET password = (?)  WHERE email = (?)",
+        [adminPassword, adminEmail]
+      );
+      console.log("admin password reset successfully", result);
+    } catch (error) {
+      console.log({ error });
+      throw error; // Propagate the error to the controller
+    }
+  }
+
   static async validateAdmin(adminEmail, adminPassword) {
     const result = await executeQuery(
       "SELECT * FROM admin WHERE email = (?)LIMIT 1",

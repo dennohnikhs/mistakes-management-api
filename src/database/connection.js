@@ -1,18 +1,18 @@
 const mysql = require("mysql2");
 const { makeDb } = require("mysql-async-simple");
 
-// var con = {
-//   host: process.env.DB_HOST || "localhost",
-//   user: process.env.DB_USERNAME || "root",
-//   password: process.env.DB_PASSWORD || "",
-//   database: process.env.DB_NAME || "points_system",
-// };
 var con = {
-  host: "localhost",
-  user: "root",
-  password: "admin",
-  database: "points_system",
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USERNAME || "root",
+  password: process.env.DB_PASSWORD || "admin",
+  database: process.env.DB_NAME || "points_system",
 };
+// var con = {
+//   host: "localhost",
+//   user: "root",
+//   password: "admin",
+//   database: "points_system",
+// };
 
 let connection;
 

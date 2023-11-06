@@ -25,17 +25,17 @@ async function login(req, res) {
         { id: adminDetails.id, isAdmin: true },
         process.env.JWT_SECRET,
         {
-          expiresIn: "5d",
+          expiresIn: "1d",
         }
       );
       return res.send({
         success: true,
-        message: "Admin login successful",
+        message: "Admin login successful ✔ ",
         token: token,
       });
     } else {
       res.statusCode = 401;
-      return res.json({
+      return res.send({
         message: "Invalid email or password",
         success: false,
       });
@@ -47,7 +47,7 @@ async function login(req, res) {
         { id: teacherDetails.id, isAdmin: false },
         process.env.JWT_SECRET,
         {
-          expiresIn: "5d",
+          expiresIn: "1d",
         }
       );
       return res.send({

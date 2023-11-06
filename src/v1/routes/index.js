@@ -13,6 +13,9 @@ const getSessionsRoutes = require("./get-sessions");
 const addOffenseRoutes = require("./new_offense");
 const addNewOffenseRouter = require("./new_offense");
 const getAllOffenseRecords = require("./get_offense_records");
+const deleteAdminRoutes = require("./delete_admin");
+const updateAdminRoutes = require("./edit_admin");
+const searchAdminByEmailRoutes = require("./search_admin");
 const router = express.Router();
 
 /**
@@ -41,5 +44,8 @@ router.use(getSessionsRoutes);
 router.use(addOffenseRoutes);
 router.use(addNewOffenseRouter);
 router.use(getAllOffenseRecords);
+router.use(deleteAdminRoutes);
+router.use(updateAdminRoutes);
+router.use(searchAdminByEmailRoutes);
 
 module.exports = router;

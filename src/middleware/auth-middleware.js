@@ -26,7 +26,7 @@ async function protect(req, res, next) {
     }
   } catch (error) {
     return res.status(401).json({
-      message: "Failed to authenticate teacher",
+      message: "Failed to authenticate token",
       success: false,
       error,
     });

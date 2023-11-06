@@ -35,6 +35,7 @@ async function addAdmin(req, res) {
     }
   }
 }
+
 async function getAdmins(req, res) {
   try {
     let result = await Admin.getAllAdmins();
@@ -54,4 +55,77 @@ async function getAdmins(req, res) {
     }
   }
 }
-module.exports = { addAdmin, getAdmins };
+async function deleteAdmin(req, res) {
+  const adminEmail = req.params.email;
+
+  try {
+    await Admin.deleteOneAdmin(adminEmail);
+    return res.json({
+      success: true,
+      success_message: "admin deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to delete admin");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message: "Oops!!! an error occurred while trying to delete admin",
+    });
+  }
+}
+async function editAdmin(req, res) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  const adminPassword = hashedPassword;
+  const adminEmail = req.params.email;
+
+  try {
+    await Admin.editAdminDetails(adminPassword, adminEmail);
+    return res.json({
+      success: true,
+      success_message: "admin edited successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to edit admin");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message: "Oops!!! an error occurred while trying to edit admin",
+    });
+  }
+}
+async function searchAdminByEmail(req, res) {
+  const adminEmail = req.query.email;
+
+  try {
+    const adminIsFound = await Admin.findOne(adminEmail);
+    if (!adminIsFound) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Admin not found" });
+    }
+
+    return res.json({
+      success: true,
+      admin: adminIsFound,
+    });
+  } catch (error) {
+    console.log("Error while trying to edit admin");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message: "Oops!!! an error occurred while trying to search admin",
+    });
+  }
+}
+
+module.exports = {
+  addAdmin,
+  getAdmins,
+  deleteAdmin,
+  editAdmin,
+  searchAdminByEmail,
+};
