@@ -58,4 +58,79 @@ async function getAllTeachers(req, res) {
     }
   }
 }
-module.exports = { addTeacher, getAllTeachers };
+async function deleteTeacher(req, res) {
+  const teacherEmail = req.params.email;
+
+  try {
+    await Teacher.deleteOneTeacher(teacherEmail);
+    return res.json({
+      success: true,
+      success_message: "teacher deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to delete teacher");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message:
+        "Oops!!! an error occurred while trying to delete teacher",
+    });
+  }
+}
+async function editTeacher(req, res) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  const teacherPassword = hashedPassword;
+  const teacherEmail = req.params.email;
+
+  try {
+    await Teacher.editTeacherPasswordDetails(teacherPassword, teacherEmail);
+    return res.json({
+      success: true,
+      success_message: "teacher edited successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to edit teacher");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message: "Oops!!! an error occurred while trying to edit teacher",
+    });
+  }
+}
+async function searchTeacherByEmail(req, res) {
+  const teacherEmail = req.query.email;
+
+  try {
+    let teacherResults = await Teacher.findOne(teacherEmail);
+    if (!teacherResults) {
+      return res.json({
+        success: false,
+        error_message: "No teacher found",
+      });
+    }
+    return res.json({
+      success: true,
+      teacher: teacherResults,
+    });
+  } catch (error) {
+    console.log("Error while trying to edit teacher");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message:
+        "Oops!!! an error occurred while trying to search teacher",
+    });
+  }
+}
+
+module.exports = {
+  addTeacher,
+  getAllTeachers,
+  deleteTeacher,
+  editTeacher,
+  searchTeacherByEmail,
+};

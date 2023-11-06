@@ -16,6 +16,9 @@ const getAllOffenseRecords = require("./get_offense_records");
 const deleteAdminRoutes = require("./delete_admin");
 const updateAdminRoutes = require("./edit_admin");
 const searchAdminByEmailRoutes = require("./search_admin");
+const searchTeacherByEmailRoutes = require("./search_teacher");
+const editTeacherRoutes = require("./edit_teacher");
+const deleteTeacherRoutes = require("./delete_teacher");
 const router = express.Router();
 
 /**
@@ -47,5 +50,8 @@ router.use(getAllOffenseRecords);
 router.use(deleteAdminRoutes);
 router.use(updateAdminRoutes);
 router.use(searchAdminByEmailRoutes);
+router.use(searchTeacherByEmailRoutes);
+router.use(editTeacherRoutes);
+router.use(deleteTeacherRoutes);
 
 module.exports = router;

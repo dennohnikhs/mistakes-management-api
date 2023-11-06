@@ -100,19 +100,17 @@ async function searchAdminByEmail(req, res) {
   const adminEmail = req.query.email;
 
   try {
-    const adminIsFound = await Admin.findOne(adminEmail);
-    if (!adminIsFound) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Admin not found" });
+    const isFoundAdmin = await Admin.findOne(adminEmail);
+    if (!isFoundAdmin) {
+      return res.json({ success: false, error_message: "Admin not found" });
     }
 
     return res.json({
       success: true,
-      admin: adminIsFound,
+      admin: isFoundAdmin,
     });
   } catch (error) {
-    console.log("Error while trying to edit admin");
+    console.log("Error while trying to search admin");
     console.log({ error });
     res.status(500).json({
       // Send a 500 status code for server errors

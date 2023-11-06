@@ -30,7 +30,10 @@ class Admin {
       "SELECT name,phone_number,id FROM admin WHERE email =  (?)",
       [adminEmail]
     );
-    return result;
+    if (result.length > 0) {
+      return result;
+    }
+    return false;
   }
   static async editAdminDetails(adminPassword, adminEmail) {
     try {

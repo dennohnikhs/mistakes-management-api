@@ -24,15 +24,38 @@ class Teacher {
   }
   static async findOne(email) {
     const result = await executeQuery(
-      "SELECT COUNT(*) AS existing_count FROM teacher WHERE email = (?)",
+      "SELECT name,email,phone_number,id FROM teacher WHERE email =  (?) LIMIT 1",
       [email]
     );
-
-    if (result && result[0].existing_count > 0) return true;
-
+    if (result.length > 0) {
+      return result;
+    }
     return false;
   }
-
+  static async deleteOneTeacher(teacherEmail) {
+    try {
+      let result = await executeQuery(
+        "DELETE FROM teacher WHERE email =  (?)",
+        [teacherEmail]
+      );
+      console.log("teacher deleted", result);
+    } catch (error) {
+      console.log({ error });
+      throw error; // Propagate the error to the controller
+    }
+  }
+  static async editTeacherPasswordDetails(teacherPassword, teacherEmail) {
+    try {
+      let result = await executeQuery(
+        "UPDATE teacher SET password = (?)  WHERE email = (?)",
+        [teacherPassword, teacherEmail]
+      );
+      console.log("teacher password reset successfully", result);
+    } catch (error) {
+      console.log({ error });
+      throw error; // Propagate the error to the controller
+    }
+  }
   static async validateTeacher(teacherEmail, teacherPassword) {
     const result = await executeQuery(
       "SELECT  * FROM teacher WHERE email = (?) LIMIT 1",
