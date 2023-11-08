@@ -19,6 +19,7 @@ const searchAdminByEmailRoutes = require("./search_admin");
 const searchTeacherByEmailRoutes = require("./search_teacher");
 const editTeacherRoutes = require("./edit_teacher");
 const deleteTeacherRoutes = require("./delete_teacher");
+const deleteStudentRoutes = require("./delete_student");
 const router = express.Router();
 
 /**
@@ -53,5 +54,6 @@ router.use(searchAdminByEmailRoutes);
 router.use(searchTeacherByEmailRoutes);
 router.use(editTeacherRoutes);
 router.use(deleteTeacherRoutes);
+router.use(deleteStudentRoutes);
 
 module.exports = router;

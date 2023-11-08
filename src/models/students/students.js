@@ -12,6 +12,16 @@ class Student {
       console.log(error);
     }
   }
+
+  static async deleteOneStudent(studentAdmissionNumber) {
+    try {
+      await executeQuery("DELETE FROM student WHERE admission_number  = ?", [
+        studentAdmissionNumber,
+      ]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   static async exists(admissionNumber) {
     const result = await executeQuery(
       "SELECT COUNT(*) AS existing_count FROM student WHERE admission_number  = ?",

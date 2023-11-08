@@ -15,7 +15,7 @@ async function validateAddStudents(req) {
     };
   }
 
-  if (!req.body.class) {
+  if (!req.body.student_class) {
     return {
       isValid: false,
       message: "class name is required.",

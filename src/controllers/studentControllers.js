@@ -17,7 +17,7 @@ async function addStudent(req, res) {
     await Student.addOne(
       req.body.name,
       req.body.admission_number,
-      req.body.class,
+      req.body.student_class,
       req.body.stream
     );
     return res.json({
@@ -65,8 +65,27 @@ async function getStudents(req, res) {
     }
   }
 }
-
+async function deleteStudent(req, res) {
+  const studentAdmissionNumber = req.params.admission_number;
+  try {
+    await Student.deleteOneStudent(studentAdmissionNumber);
+    return res.json({
+      success: true,
+      success_message: "student deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to delete student");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message:
+        "Oops!!! an error occurred while trying to delete student",
+    });
+  }
+}
 module.exports = {
   addStudent,
   getStudents,
+  deleteStudent,
 };
