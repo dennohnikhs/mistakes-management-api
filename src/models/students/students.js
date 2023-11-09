@@ -12,6 +12,22 @@ class Student {
       console.log(error);
     }
   }
+  static async editStudentDetails(
+    studentName,
+    studentClass,
+    stream,
+    status,
+    studentAdmissionNumber
+  ) {
+    try {
+      await executeQuery(
+        "UPDATE student SET name = (?) ,class=(?), stream=(?),status =(?)  WHERE admission_number = (?)",
+        [studentName, studentClass, stream, status, studentAdmissionNumber]
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   static async deleteOneStudent(studentAdmissionNumber) {
     try {

@@ -65,6 +65,36 @@ async function getStudents(req, res) {
     }
   }
 }
+async function editStudent(req, res) {
+  const { name, student_class, stream, status } = req.body;
+  const { admission_number } = req.params;
+  try {
+    if (!name || !student_class || !stream || !status)
+      return res.json({
+        success: false,
+        success_message: "please fill all the fields",
+      });
+    await Student.editStudentDetails(
+      name,
+      student_class,
+      stream,
+      status,
+      admission_number
+    );
+    return res.json({
+      success: true,
+      success_message: "student edited successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to edit student");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message: "Oops!!! an error occurred while trying to edit student",
+    });
+  }
+}
 async function deleteStudent(req, res) {
   const studentAdmissionNumber = req.params.admission_number;
   try {
@@ -88,4 +118,5 @@ module.exports = {
   addStudent,
   getStudents,
   deleteStudent,
+  editStudent,
 };
