@@ -21,7 +21,8 @@ async function validateAddStudents(req) {
       message: "class name is required.",
     };
   }
-  let pattern = /[A-Z][0-9][0-9][0-9][0-9]/;
+  // let pattern = /[A-Z][0-9][0-9][0-9][0-9]/;
+  let pattern = /^[A-Z]\d{5}$/;
 
   if (!req.body.admission_number.match(pattern)) {
     return {
