@@ -108,7 +108,7 @@ async function searchStudent(req, res) {
 
     return res.json({
       success: true,
-      admin: student,
+      student: student,
     });
   } catch (error) {
     console.log("Error while trying to search student");

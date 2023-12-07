@@ -68,7 +68,7 @@ class Student {
   }
   static async findOneStudent(studentAdmissionNumber) {
     const result = await executeQuery(
-      "SELECT id,name,class,stream,admission_number FROM student WHERE id = (?)",
+      "SELECT id,name,class,stream,admission_number,status FROM student WHERE admission_number  = (?)",
       [studentAdmissionNumber]
     );
     if (result && result[0]) {
