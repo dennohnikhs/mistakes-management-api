@@ -89,9 +89,35 @@ async function editStudent(req, res) {
     console.log("Error while trying to edit student");
     console.log({ error });
     res.status(500).json({
-      // Send a 500 status code for server errors
       success: false,
       success_message: "Oops!!! an error occurred while trying to edit student",
+    });
+  }
+}
+async function searchStudent(req, res) {
+  const { admissionNumber } = req.query;
+
+  try {
+    const student = await Student.findOneStudent({
+      admission_number: admissionNumber,
+    });
+
+    if (!student) {
+      return res.json({ success: false, error_message: "student not found" });
+    }
+
+    return res.json({
+      success: true,
+      admin: student,
+    });
+  } catch (error) {
+    console.log("Error while trying to search student");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message:
+        "Oops!!! an error occurred while trying to search student",
     });
   }
 }
@@ -119,4 +145,5 @@ module.exports = {
   getStudents,
   deleteStudent,
   editStudent,
+  searchStudent,
 };

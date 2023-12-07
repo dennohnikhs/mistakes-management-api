@@ -66,10 +66,10 @@ class Student {
     const result = await executeQuery(sql, []);
     return result;
   }
-  static async getOne(studentId) {
+  static async findOneStudent(studentAdmissionNumber) {
     const result = await executeQuery(
       "SELECT id,name,class,stream,admission_number FROM student WHERE id = (?)",
-      [studentId]
+      [studentAdmissionNumber]
     );
     if (result && result[0]) {
       const studentDetails = result[0];

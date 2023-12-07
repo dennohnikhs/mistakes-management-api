@@ -58,26 +58,7 @@ async function getAllTeachers(req, res) {
     }
   }
 }
-async function deleteTeacher(req, res) {
-  const teacherEmail = req.params.email;
 
-  try {
-    await Teacher.deleteOneTeacher(teacherEmail);
-    return res.json({
-      success: true,
-      success_message: "teacher deleted successfully",
-    });
-  } catch (error) {
-    console.log("Error while trying to delete teacher");
-    console.log({ error });
-    res.status(500).json({
-      // Send a 500 status code for server errors
-      success: false,
-      success_message:
-        "Oops!!! an error occurred while trying to delete teacher",
-    });
-  }
-}
 async function editTeacher(req, res) {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -126,7 +107,26 @@ async function searchTeacherByEmail(req, res) {
     });
   }
 }
+async function deleteTeacher(req, res) {
+  const teacherEmail = req.params.email;
 
+  try {
+    await Teacher.deleteOneTeacher(teacherEmail);
+    return res.json({
+      success: true,
+      success_message: "teacher deleted successfully",
+    });
+  } catch (error) {
+    console.log("Error while trying to delete teacher");
+    console.log({ error });
+    res.status(500).json({
+      // Send a 500 status code for server errors
+      success: false,
+      success_message:
+        "Oops!!! an error occurred while trying to delete teacher",
+    });
+  }
+}
 module.exports = {
   addTeacher,
   getAllTeachers,

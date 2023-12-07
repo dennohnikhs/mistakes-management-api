@@ -22,6 +22,7 @@ const deleteTeacherRoutes = require("./delete_teacher");
 const deleteStudentRoutes = require("./delete_student");
 const editStudentRoutes = require("./edit_student");
 const router = express.Router();
+const searchStudentRoutes = require("./search_student");
 
 /**
  * @openapi
@@ -57,5 +58,6 @@ router.use(editTeacherRoutes);
 router.use(deleteTeacherRoutes);
 router.use(deleteStudentRoutes);
 router.use(editStudentRoutes);
+router.use(searchStudentRoutes);
 
 module.exports = router;
