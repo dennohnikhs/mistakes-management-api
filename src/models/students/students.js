@@ -68,13 +68,13 @@ class Student {
   }
   static async findOneStudent(studentAdmissionNumber) {
     const result = await executeQuery(
-      "SELECT id,name,class,stream,admission_number,status FROM student WHERE admission_number  = (?)",
+      "SELECT id,name,class,stream,admission_number,status FROM student WHERE admission_number  = (?) LIMIT 1",
       [studentAdmissionNumber]
     );
-    if (result && result[0]) {
-      const studentDetails = result[0];
-      return studentDetails;
+    if (result.length > 0) {
+      return result;
     }
+    return false;
   }
 }
 module.exports = {

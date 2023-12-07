@@ -95,12 +95,10 @@ async function editStudent(req, res) {
   }
 }
 async function searchStudent(req, res) {
-  const { admissionNumber } = req.query;
+  const admissionNumber = req.query.admission_number;
 
   try {
-    const student = await Student.findOneStudent({
-      admission_number: admissionNumber,
-    });
+    const student = await Student.findOneStudent(admissionNumber);
 
     if (!student) {
       return res.json({ success: false, error_message: "student not found" });
