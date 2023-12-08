@@ -5,7 +5,7 @@ class Student {
   static async addOne(studentName, admissionNumber, className, streamName) {
     try {
       await executeQuery(
-        "INSERT INTO student (name,admission_number,class,stream) VALUES (?,?,?,?)",
+        "INSERT INTO student (name,admission_number,class,stream,status) VALUES (?,?,?,?,100)",
         [studentName, admissionNumber, className, streamName]
       );
     } catch (error) {
@@ -62,7 +62,10 @@ class Student {
     if (studentClass) {
       conditions.push(` s.class = ${studentClass}`);
     }
-    let sql = buildQuery("SELECT * FROM student s", conditions);
+    let sql = buildQuery(
+      "SELECT * FROM student s ORDER BY class ASC,stream ASC; ",
+      conditions
+    );
     const result = await executeQuery(sql, []);
     return result;
   }
